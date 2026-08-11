@@ -4,9 +4,7 @@ const msg = document.getElementById("bookingMsg");
 document.querySelectorAll("[data-service]").forEach(function(a) {
   a.addEventListener("click", function() {
     const service = document.querySelector('[name="service"]');
-    if (service) {
-      service.value = a.dataset.service;
-    }
+    if (service) service.value = a.dataset.service;
   });
 });
 
@@ -21,7 +19,7 @@ form.addEventListener("submit", function(e) {
   const time = form.querySelector('[name="time"]').value;
   const message = form.querySelector('[name="message"]').value;
 
-  const text = `🔧 NEW ALFA MOTORS SERVICE BOOKING
+  const emailBody = `NEW ALFA MOTORS SERVICE BOOKING
 
 Customer: ${name}
 Phone: ${phone}
@@ -31,14 +29,17 @@ Date: ${date}
 Time: ${time}
 Message: ${message}`;
 
-  const whatsappURL =
-    "https://wa.me/918810839160?text=" +
-    encodeURIComponent(text);
+  const gmailURL =
+    "mailto:jsalfamotors@gmail.com" +
+    "?subject=" +
+    encodeURIComponent("New Alfa Motors Service Booking") +
+    "&body=" +
+    encodeURIComponent(emailBody);
 
-  window.open(whatsappURL, "_blank");
+  window.location.href = gmailURL;
 
   if (msg) {
-    msg.textContent =
-      "Booking details prepared. Please send the WhatsApp message to Alfa Motors.";
+    msg.textContent = "Booking details are ready in your email app. Please press Send.";
+    msg.style.color = "#11823b";
   }
 });
